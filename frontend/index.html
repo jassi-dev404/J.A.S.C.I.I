@@ -8,22 +8,23 @@
   <link rel="stylesheet" href="./style.css">
   <script src="./vendor/jquery.min.js"></script>
   <script src="./vendor/coffeescript.js"></script>
-  <link rel="icon" type="image/x-icon" href="finally.png"
-</head>
+  <link rel="icon" type="image/x-icon" href="finally.png" </head>
 
 <body class="bg-[#FAF9F6]">
   <input type="file" id="Image-input" accept="image/png, image/jpg, image/jpeg" style="display: none;" />
   <style>
     @font-face {
       font-family: custom;
-      src: url(JetBrainsMonoNL-Regular.ttf);   /*why tf do i have to use different comments for css smh, anyways yes one of the greatest fonts aot*/
+      src: url(JetBrainsMonoNL-Regular.ttf);
+      /*why tf do i have to use different comments for css smh, anyways yes one of the greatest fonts aot*/
     }
 
+    /* i stole the slider thing from w3schools.com :)*/
     #lol {
       border: 2px solid black;
       margin-left: auto;
       margin-right: auto;
-      display: flex;      
+      display: flex;
       justify-content: center;
       align-items: center;
     }
@@ -35,6 +36,70 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    #log {
+      font-size: 5px;
+    }
+
+    .switch {
+      position: relative;
+      display: block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .2s;
+      transition: .2s;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      -webkit-transition: .2s;
+      transition: .2s;
+    }
+
+    input:checked+.slider {
+      background-color: #2C3947;
+    }
+
+    input:focus+.slider {
+      box-shadow: 0 0 1px #2C3947;
+    }
+
+    input:checked+.slider:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+      border-radius: 34px;
+    }
+
+    .slider.round:before {
+      border-radius: 50%;
     }
   </style>
   <h1 id="heading" class="text-[9rem] text-center pt-18 font-[custom]">
@@ -49,25 +114,46 @@
         class="text-sm">only jpeg, png & jpg file formats allowed :)</span></h1>
   </div>
   <div id="loll" class="flex justify-center items-center p-4" style="display: none;">
-    <pre id="log" class="text-left font-[custom] text-xs leading-[0.85] whitespace-pre"></pre>
+    <pre id="log" class="text-left font-[custom] leading-[0.85] whitespace-pre"></pre>
   </div>
-  <button id="reset" class="font-[custom] text-[1rem] text-center block mx-auto my-6" style="display: none;">do you want to reset?</button>
-  <script>
-    var Module = {                               // finnally, anyways i am sorry but line 56-79 are wrriten by an llm, i dont know a single fucking thing which is going on, if you can fix this slop please contribute. i am sorry for using an llm :c
+  <button id="reset" class="font-[custom] text-[1rem] text-center block mx-auto my-6" style="display: none;">do you want
+    to reset?</button>
+  <div class="flex pt-10 justify-center items-center" id="10">
+    <label class="switch">
+      <input type="checkbox" id="accept" name="accept" value="yes">
+      <span class="slider round"></span>
+  </div>
+  <p class="text-center text-small font-[custom] pb-8 pt-4" id="20">Toggle This Switch To Use High Resolution Mode :P</p>
+
+  </label>
+  <script> // yup line 128-164 is llm generated i am sorry :(
+    var Module = {
       print: function (message) {
         var logger = document.getElementById('log');
         if (logger) {
-          logger.style.whiteSpace = 'pre';    
-          logger.style.lineHeight = '1.1';   
-          logger.style.textAlign = 'left';   
+          logger.style.whiteSpace = 'pre';
+          logger.style.lineHeight = '1.1';
+          logger.style.textAlign = 'left';
           logger.textContent += message + '\n';
         }
       }
     };
+    function updateSizeFromToggle() {
+      const cb = document.querySelector('#accept');
+      const text = document.getElementById('log');
+      if (!cb.checked) {
+        Module.ccall('get_size', null, ['number'], [40]);
+        text.style.fontSize = '1rem';
+      } else {
+        Module.ccall('get_size', null, ['number'], [80]);
+        text.style.fontSize = '5px';
+      }
+    }
     document.getElementById("Image-input").addEventListener("change", async (e) => {
       const file = e.target.files[0];
       if (!file) return;
       document.getElementById('log').textContent = '';
+      updateSizeFromToggle();
       const buffer = await file.arrayBuffer();
       Module.FS.writeFile("googoo.png", new Uint8Array(buffer));
       Module.callMain();
@@ -78,7 +164,7 @@
       });
     });
   </script> <!--- aha, coffeescript and jquery in 2026, please dont laugh at me :c --->
-  <script type="text/coffeescript">  
+  <script type="text/coffeescript">
 $ ->
   $("#my-btn").on "click", ->
     $("#Image-input").click()
@@ -86,9 +172,11 @@ $ ->
     file = e.target.files[0]
     $('#loll').show()
     $('#lol').hide()
+    $('#10').hide()
+    $('#20').hide()
     $('#reset').show()
   </script><!--- go check it or smth --->
-  <script type="text/coffeescript"> 
+  <script type="text/coffeescript">
 $ ->
   $('#my-btn').on 'click', ->   
     $.get './node_modules/ping/data/src/qr.html'
@@ -101,4 +189,5 @@ $ ->
   <script src="a.out.js"></script> <!--- my wasm thing --->
 </body>
 <!--- goodbye, jassi out --->
+
 </html>

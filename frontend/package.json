@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack serve --mode development"
   },
   "keywords": [],
   "author": "",
@@ -12,9 +13,13 @@
   "type": "commonjs",
   "devDependencies": {
     "@types/jquery": "^4.0.1",
-    "coffeescript": "^2.7.0"
+    "coffeescript": "^2.7.0",
+    "webpack": "^5.109.2",
+    "webpack-cli": "^7.2.2",
+    "webpack-dev-server": "^6.0.0"
   },
   "dependencies": {
+    "express": "^5.2.1",
     "jquery": "^4.0.0"
   }
 }

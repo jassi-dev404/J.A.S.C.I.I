@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #ifdef __EMSCRIPTEN__
 #include <emscripten.h>
 #else
@@ -14,9 +15,17 @@
 #define STB_IMAGE_RESIZE_IMPLEMENTATION // ok so like line 2-15 just import the stuff needed such as Stb libraries for processing and resizing images and ofc stdio.h the goat cant even print without it lol
 #include "stb_image_resize2.h"
 
+
 #define  Pr  .299
 #define  Pg  .587
 #define  Pb  .114
+
+int size;
+
+EMSCRIPTEN_KEEPALIVE
+void get_size(int a) {
+    size = a;
+  }
 
 void changeSaturation(double *R, double *G, double *B, double change) {       //stole this code from here: https://alienryderflex.com/saturation.html
 
@@ -31,7 +40,6 @@ void changeSaturation(double *R, double *G, double *B, double change) {       //
 
 int width_shrunk;
 int height_shrunk;
-
 int main(void)
 {
   int width, height, original_channels; // ah yes, initialising some *kewl* variables :)
@@ -50,7 +58,10 @@ int main(void)
       &width, &height, &original_channels, 3);
   width_shrunk = width;   // this is because uhhhh idk
   height_shrunk = height; // no actually this is so that we can shrink them with the algorithm (or whatever the fuck you call it) below
-  while (width_shrunk > 60 && height_shrunk > 60)
+  if (size <= 0) {
+    size = 40;
+  }
+  while (width_shrunk > size && height_shrunk > size)
   {
     width_shrunk = width_shrunk * 0.95;
     height_shrunk = height_shrunk * 0.95; // this is smart right ( ˊᵕˋ )
