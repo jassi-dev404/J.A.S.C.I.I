@@ -6,7 +6,7 @@ node_modules
 frontend/scripts/a.out*
 package-lock.json
 .header_files
-C_stuff/header_files/
+C_stuff/external/
 frontend/style.css
 frontend/scripts/tailwind-browser.js
 frontend/node_modules
