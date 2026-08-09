@@ -113,8 +113,11 @@
       term.clear();
       updateSizeFromToggle();
       const buffer = await file.arrayBuffer();
-      Module.FS.writeFile("googoo.png", new Uint8Array(buffer));  //it takes the binary data of the image you upload and makes a new file with that binary data named as "googoo.png"
-      Module.callMain();
+      const fileName = file.name;
+
+      Module.FS.writeFile(fileName, new Uint8Array(buffer));
+      Module.callMain([fileName]);
+
       const getWidth = Module.cwrap('image_width', 'number', []);
       const getHeight = Module.cwrap('image_height', 'number', []);
       term.resize(getWidth() + 10, getHeight() + 10);
