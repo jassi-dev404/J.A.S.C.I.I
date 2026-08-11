@@ -1,5 +1,6 @@
 // welcome welcome, reading my shitty code are we xD, anyways keep going down. I
 // will try my best to explain stuff :)
+#include <err.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,13 +13,11 @@
 #include "stb_image.h"
 #include "stb_image_resize2.h"
 
-#define MAX_SIZE 60
-
 #define Pr .299
 #define Pg .587
 #define Pb .114
 
-int size;
+int size = 60;
 int color;
 
 EMSCRIPTEN_KEEPALIVE
@@ -36,7 +35,9 @@ void color_set(int z)
 // stole this code from here: https://alienryderflex.com/saturation.html
 void changeSaturation(double *R, double *G, double *B, double change)
 {
-	double P = sqrt((*R) * (*R) * Pr + (*G) * (*G) * Pg + (*B) * (*B) * Pb);
+	double P = sqrt((*R) * (*R) * Pr + //
+	                (*G) * (*G) * Pg + //
+	                (*B) * (*B) * Pb);
 
 	*R = P + ((*R) - P) * change;
 	*G = P + ((*G) - P) * change;
@@ -58,14 +59,15 @@ int main(int argc, char **argv)
 	int      width, height, original_channels;
 	stbi_uc *img =
 			stbi_load(image_path, &width, &height, &original_channels, 3);
+	if (!img) errx(1, "Failed to load image %s", image_path);
 
 	// this is because terminal likes to shrink the width to roughly half of
 	// height (shoutout bolt from cs50 discord)
-	const double scale_factor = MAX_SIZE / fmax(height, width);
+	const double scale_factor = size / fmax(height, width);
 	width_shrunk              = (int)(width * scale_factor * 2);
 	height_shrunk             = (int)(height * scale_factor);
 
-	stbi_uc map[MAX_SIZE * MAX_SIZE * 2 * 3];
+	stbi_uc *map = malloc(size * size * 2 * 3);
 	// stbir_resize_uint8_srgb(img, width, height, 0, map, width_shrunk,
 	// height_shrunk, 0, STBIR_RGB); // stb the goat
 	stbir_resize(img, width, height, 0, map, width_shrunk, height_shrunk, 0,
@@ -112,6 +114,7 @@ int main(int argc, char **argv)
 		}
 		printf("\n");
 	}
+	free(map);
 	free(img); // no ram hogging in here :D
 }
 
