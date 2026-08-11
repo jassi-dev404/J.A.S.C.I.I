@@ -21,12 +21,15 @@ umm because:
 > NOTE: You Can Download The Repository And Run `build.sh` && `node scripts/server.js` So That You Can Have A Working Version Of The Website At http://localhost:6969/ (funni number :P )
 
 ## Some Examples
-Rem from rezero, i am sorry idk where the art is from <br>
-![Wow! You could not load the image lol](/assets/rem.jpg)
-![Is your internet really that bad?](/assets/rem_ASCII.webp) <br>
-Hornet, from silksong (an amazing game actually) <br>
+A Good Boy <br>
+![Wow! You could not load the image lol](/assets/good_boy.jpg)
+![Is your internet really that bad?](/assets/good_boy_ASCII_low.png) <br>
+Hornet from silksong (an amazing game btw) <br>
 ![Gng get a better router :sob:](/assets/hornet.jpg)
-![Bad internet lolllll](/assets/hornet_ASCII.png) <br>
+![Bad internet lolllll](/assets/hornet_ASCII_Coloured.png) <br>
+Things Which Keeps The Doctor Away <br>
+![git gud bitch](/assets/apples.jpg)<br>
+![loadimages.com](/assets/apples_ASCII.png)
 
 > Credits to Sophie for helping with WASM implementation <br>
 thats it, jassi out :)
