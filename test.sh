@@ -1,2 +1,4 @@
+#!/bin/bash
+source C_stuff/emsdk/emsdk_env.sh
 cd frontend
-python3 -m http.server 8000 --bind 127.0.0.1
+emrun index.html
