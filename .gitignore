@@ -1,6 +1,8 @@
 .DS_Store
 *.dSYM
 /C_stuff/main.dSYM
+/C_stuff/external
+/C_stuff/asciiart
 emsdk
 node_modules
 frontend/scripts/a.out*
@@ -10,3 +12,5 @@ C_stuff/external/
 frontend/style.css
 frontend/scripts/tailwind-browser.js
 frontend/node_modules
+frontend/a.out.js
+frontend/a.out.wasm
