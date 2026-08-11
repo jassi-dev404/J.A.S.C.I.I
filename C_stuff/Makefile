@@ -43,12 +43,7 @@ $(obj_pattern): %.c
 
 .PHONY: test
 test: all
-	./$(target) googoo.png
-	./$(target) horse.png
-	./$(target) blossom.png
-	./$(target) flower.png
-	./$(target) spider.png
-	./$(target) avatar.png
+	./$(target) ../assets/hornet.jpg
 
 .PHONY: clean
 clean:
