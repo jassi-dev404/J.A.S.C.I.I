@@ -27,7 +27,7 @@ endif
 all: $(config)
 
 .PHONY: debug
-debug: CFLAGS += -g -fsanitize=undefined,address
+debug: CFLAGS += -g -fsanitize=undefined,address -fno-sanitize=alignment
 debug: $(target)
 
 .PHONY: release
