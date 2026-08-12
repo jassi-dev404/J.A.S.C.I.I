@@ -48,15 +48,6 @@ void changeSaturation(double *R, double *G, double *B, double change)
 int width_shrunk;
 int height_shrunk;
 
-static struct option long_options[] = {
-		{"version",       no_argument, NULL, 'v'},
-		{  "image", required_argument, NULL, 'i'},
-		{  "color",       no_argument, NULL, 'c'},
-		{   "size", required_argument, NULL, 's'},
-		{		"help", 			no_argument, NULL, 'h'},
-		{     NULL,				 0, NULL,   0}
-};
-
 int main(int argc, char **argv)
 {
 	int         opt        = 0;
