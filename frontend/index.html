@@ -51,6 +51,26 @@
     #log {
       font-size: 5px;
     }
+
+    #reset {
+      cursor: pointer;
+    }
+
+    #button1 {
+      cursor: pointer;
+    }
+
+    #copy-btn {
+      cursor: pointer;
+    }
+
+    #myRange {
+      width: 800px;
+    }
+
+    #myRange2 {
+      width: 800px;
+    }
   </style>
   <h1 id="heading" class="text-[9rem] text-center pt-18 font-[custom]">
     J.A.S.C.I.I
@@ -59,7 +79,7 @@
     Jassi's Image To <u class="text-blue-400"><span class="text-blue-400"><a
           href="https://en.wikipedia.org/wiki/ASCII_art" target="_blank">A.S.C.I.I</a></span></u> Art Converter
   </h2>
-  <div id="lol" class="size-100 w-150 p-20 justify-center pt-28 items-center">
+  <div id="lol" class="size-100 w-150 p-20 justify-center pt-28 items-center cursor-pointer">
     <h1 id="my-btn" class="text-center text-[3rem] font-[custom] pb-8">Click Me To Select Your Image <br> <span
         class="text-sm">only jpeg, png & jpg file formats allowed :)</span></h1>
   </div>
@@ -67,25 +87,55 @@
     <pre id="log" class="text-left font-[custom] leading-[0.85] whitespace-pre"></pre>
     <div id="logg" class="text-left font-[custom] leading-[0.85] whitespace-pre"></div>
   </div>
-  <button id="reset" class="font-[custom] text-[1rem] text-center block mx-auto my-6" style="display: none;">do you want
-    to reset?</button>
-  <div class="flex pt-10 justify-center items-center align-items gap-10" id="10">
+  <div class="flex flex-row justify-center items-center pt-5 pb-5">
+    <input type="range" min="1" max="5" value="50" id="myRange2" style="display: none;">
+  </div>
+  <div class="flex flex-row justify-center items-center pt-5 pb-5" id="value2" style="display: none;">
+    <p class="text-center text-[1rem] font-[custom]">adjust download resolution using the slider, current resolution:
+    </p>
+    <p class="text-center text-[1rem] font-[custom]" id="current_resolution"></p>
+  </div>
+  <button id="copy-btn" class="font-[custom] text-[1rem] text-center block mx-auto my-6" style="display: none;">
+    click me to copy ascii text!!</button>
+  <button id="button1" class="font-[custom] text-[1rem] text-center block mx-auto my-6" style="display: none;">click me
+    to download the image!!</button>
+  <button id="reset" class="font-[custom] text-[1rem] text-center block mx-auto my-6" style="display: none;">click me to
+    reset!!</button>
+  <div class="flex flex-row justify-center items-center pt-5 pb-5">
+    <input type="range" min="30" max="1000" value="50" id="myRange">
+  </div>
+  <div class="flex flex-row justify-center items-center pt-5 pb-5" id="value">
+    <p class="text-center text-[1.2rem] font-[custom]">adjust size using the slider, current size:</p>
+    <p class="text-center text-[1.2rem] font-[custom]" id="current_size"></p>
+  </div>
+  <div class="flex pt-2 justify-center items-center align-items gap-12" id="10">
     <label class="switch">
       <input type="checkbox" id="accept" name="accept" value="yes">
       <span class="slider round"></span>
-      </label>
+    </label>
+    <p class="text-center text-[1.2rem] font-[custom]" id="20"><-- Toggle To Use Reduced Text Size <span
+        class="text-[0.8rem]"><br>(great when image size is set to a value more than 80)</span></p>
+    <br>
     <label class="switch">
       <input type="checkbox" id="color" name="accept" value="yes">
       <span class="slider round"></span>
-      </label>
+    </label>
+    <p class="text-center text-[1.2rem] font-[custom]" id="20"><-- Toggle To Use Coloured Mode</p>
   </div>
-    </div>
-    <p class="text-center text-small font-[custom] pb-8 pt-4" id="20">Toggle Left Switch To Use High Resolution Mode <br> Toggle Right Switch To Use Coloured Mode :P
-    </p>
-
-  </label>
   <script>
-    const term = new Terminal({ convertEol: true });
+    var q = 0;
+    var slider = document.getElementById("myRange");
+    var output = document.getElementById("current_size");
+    output.innerHTML = slider.value;
+    slider.oninput = function () {
+      output.innerHTML = this.value;
+    }
+    const term = new Terminal({
+      convertEol: true, allowProposedApi: true //idk what proposed api means i just pasted it from an llm sorri
+    });
+    window.addEventListener('DOMContentLoaded', () => {
+      term.open(document.getElementById('logg'));
+    });
     var Module = {
       print: function (message) {
         term.writeln(message);      //takes stuff printed by C and writes that to Xterm,js
@@ -95,11 +145,19 @@
       const cb = document.querySelector('#accept');
       const cc = document.querySelector('#color');
       if (!cb.checked) {
-        Module.ccall('get_size', null, ['number'], [40]);   //high resolution mode off
+        //reduced text size mode off
         term.options.fontSize = 16;
+        if (slider.value >= 200) {
+          q = 1
+        }
+        Module.ccall('get_size', null, ['number'], [slider.value]);
       } else {
-        Module.ccall('get_size', null, ['number'], [150]);  //high resolution mode on
+        //reduced text size mode on
         term.options.fontSize = 5;
+        if (slider.value >= 200) {
+          q = 1
+        }
+        Module.ccall('get_size', null, ['number'], [slider.value]);
       }
       if (!cc.checked) {
         Module.ccall('color_set', null, ['number'], [0]); //Colour OFF
@@ -107,7 +165,7 @@
         Module.ccall('color_set', null, ['number'], [1]); //Colour ON
       }
     }
-    document.getElementById("Image-input").addEventListener("change", async (e) => {    // yup line 110-121 is mostly llm generated i am sorry :(
+    document.getElementById("Image-input").addEventListener("change", async (e) => {    // yup line 168-183 is mostly llm generated i am sorry :(
       const file = e.target.files[0];
       if (!file) return;
       term.clear();
@@ -117,21 +175,164 @@
       Module.callMain();
       const getWidth = Module.cwrap('image_width', 'number', []);
       const getHeight = Module.cwrap('image_height', 'number', []);
-      term.resize(getWidth() + 10, getHeight() + 10);
+      if (q == 1) {
+        term.resize(getWidth() + 10, getHeight() + 10);
+      }
+      else {
+        term.resize(getWidth() + 10, getHeight() + 10);
+      }
     });
-  </script> <!--- aha, coffeescript and jquery in 2026, please dont laugh at me :c --->
+  </script>
+  <script> //line 195-326 are written by an llm :( i could not figure the 2 features out, i am so sorri i really am. all comments with no (llm) are mine
+    // this gets text from xterm (basically the entire ascii art)
+    var slider2 = document.getElementById("myRange2");
+    var output2 = document.getElementById("current_resolution"); 
+    output2.innerHTML = slider2.value;
+    slider2.oninput = function () {
+      output2.innerHTML = this.value;
+    }
+
+    function getAsciiText() {
+      const buffer = term.buffer.active;
+      let text = '';
+      for (let i = 0; i < buffer.length; i++) {
+        const line = buffer.getLine(i);
+        // translateToString(true) trims trailing empty spaces on the right side! (llm)
+        if (line) text += line.translateToString(true) + '\n';
+      }
+      return text.trimEnd();
+    }
+    // copying to clipboard 
+    document.getElementById("copy-btn").addEventListener("click", async function () {
+      const text = getAsciiText();
+      if (!text) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        const originalText = this.innerText;
+        this.innerText = "copied to clipboard!!";
+        setTimeout(() => { this.innerText = originalText; }, 2000); //it waits 2 seconds then lets you copy again
+      } catch (err) {
+        alert("Failed to copy text: " + err);
+      }
+    });
+    // AUTO RE-RENDER (When toggles/sliders change) (llm)
+    function reRender() {
+      try {
+        //ok so like this keeps checking if the wasm virtual file system has your image (because any image you upload is saved as "googoo.png")
+        if (Module.FS.analyzePath("googoo.png").exists) {
+          term.clear(); // this will clear xterm
+          updateSizeFromToggle(); // this will add new settings
+          Module.callMain(); // this runs your C code
+
+          const getWidth = Module.cwrap('image_width', 'number', []); // resizes Xterm.js
+          const getHeight = Module.cwrap('image_height', 'number', []);
+          term.resize(getWidth() + 10, getHeight() + 10);
+        }
+      } catch (e) {
+        //just waits for image to be uploaded
+      }
+    }
+    // Attach the re-render function to your HTML toggles and slider (llm)
+    document.getElementById("color").addEventListener("change", reRender);
+    document.getElementById("accept").addEventListener("change", reRender);
+    document.getElementById("myRange").addEventListener("change", reRender);
+
+    // downloads the ascii art rendered as a png
+    document.getElementById("button1").addEventListener("click", function () {
+      const buffer = term.buffer.active;
+      const rows = buffer.length;
+      if (!rows) return;
+
+      //resolution multiplier
+      const scale = slider2.value;
+
+      // Multiply the base font size by our scale! (llm)
+      // So if the terminal is at 5px, the canvas will draw it at 20px per character. (llm)
+      const baseFontSize = term.options.fontSize || 16;
+      const exportFontSize = baseFontSize * scale;
+      const fontFamily = "custom, monospace";
+
+      // --- STEP 1: MEASURE CHARACTER SIZE (AT HIGH RES) --- (llm)
+      const measureCanvas = document.createElement("canvas");
+      const measureCtx = measureCanvas.getContext("2d");
+      measureCtx.font = `${exportFontSize}px ${fontFamily}`;
+
+      const charWidth = measureCtx.measureText("M").width;
+      const lineHeight = exportFontSize * 0.85;
+
+      // --- STEP 2: FIND MAX WIDTH --- (llm)
+      let maxCols = 0;
+      for (let i = 0; i < rows; i++) {
+        const line = buffer.getLine(i);
+        if (line && line.length > maxCols) maxCols = line.length;
+      }
+
+      // --- STEP 3: CREATE THE FINAL HIGH-DEF CANVAS --- (llm)
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      // Multiply the padding so the borders scale up nicely too (llm)
+      const padding = 20 * scale;
+
+      canvas.width = Math.ceil(maxCols * charWidth) + (padding * 2);
+      canvas.height = Math.ceil(rows * lineHeight) + (padding * 2);
+
+      ctx.fillStyle = "#FAF9F6";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Apply the massive high-res font to the paintbrush (llm)
+      ctx.font = `${exportFontSize}px ${fontFamily}`;
+      ctx.textBaseline = "top";
+
+      // --- STEP 4: THE MAGIC LOOP --- (llm)
+      const cell = buffer.getNullCell();
+
+      for (let y = 0; y < rows; y++) {
+        const line = buffer.getLine(y);
+        if (!line) continue;
+
+        for (let x = 0; x < line.length; x++) {
+          line.getCell(x, cell);
+
+          const char = cell.getChars();
+          if (!char || char === ' ' || char === '') continue;
+
+          let colorCss = "#000000";
+
+          if (cell.isFgRGB && cell.isFgRGB()) {
+            const fg = cell.getFgColor();
+            const r = (fg >> 16) & 0xff;
+            const g = (fg >> 8) & 0xff;
+            const b = fg & 0xff;
+            colorCss = `rgb(${r}, ${g}, ${b})`;
+          }
+
+          ctx.fillStyle = colorCss;
+
+          // The math naturally works perfectly because charWidth and lineHeight are already scaled up! (llm)
+          const posX = padding + (x * charWidth);
+          const posY = padding + (y * lineHeight);
+
+          ctx.fillText(char, posX, posY);
+        }
+      }
+
+      // --- STEP 5: TRIGGER DOWNLOAD --- (llm)
+      const link = document.createElement("a");
+      link.href = canvas.toDataURL("image/png");
+      link.download = "ascii_art.png"; 
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  </script>
+  <!--- aha, coffeescript and jquery in 2026, please dont laugh at me :c --->
   <script type="text/coffeescript">
 $ ->
-  $("#my-btn").on "click", ->
-    $("#Image-input").click()
-  $("#Image-input").on "change", (e) ->             
-    file = e.target.files[0]
-    $('#loll').show()
-    term.open(document.getElementById('logg')); #Opens XTerm.js in here
-    $('#lol').hide()
-    $('#10').hide()
-    $('#20').hide()
-    $('#reset').show()
+  $("#my-btn").on "click", -> $("#Image-input").click()
+  $("#Image-input").on "change", ->
+    $('#loll, #reset, #button1, #copy-btn, #myRange2, #value2').show()
+    $('#lol, #10, #value, #myRange').hide()
   </script><!--- go check it or smth --->
   <script>
     $('#reset').click(function () {   //reloads page :)
