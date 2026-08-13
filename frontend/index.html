@@ -18,6 +18,10 @@
   <meta property="og:description"
     content="it converts your images into ascii art without any ads or bloat, also unlike other websites which feed your images to mark zuckerberg, this one does not :D" />
   <meta property="og:image" content="https://jascii.jassi.dev/assets/hornet_HD.png" />
+  <script>
+    import { inject } from "@vercel/analytics"
+    inject()
+  </script>
 </head>
 
 <body class="bg-[#FAF9F6]"> <!---  its not white its *whitish* and elegant --->
@@ -188,7 +192,7 @@
   <script> //line 195-326 are written by an llm :( i could not figure the 2 features out, i am so sorri i really am. all comments with no (llm) are mine
     // this gets text from xterm (basically the entire ascii art)
     var slider2 = document.getElementById("myRange2");
-    var output2 = document.getElementById("current_resolution"); 
+    var output2 = document.getElementById("current_resolution");
     output2.innerHTML = slider2.value;
     slider2.oninput = function () {
       output2.innerHTML = this.value;
@@ -322,7 +326,7 @@
       // --- STEP 5: TRIGGER DOWNLOAD --- (llm)
       const link = document.createElement("a");
       link.href = canvas.toDataURL("image/png");
-      link.download = "ascii_art.png"; 
+      link.download = "ascii_art.png";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
