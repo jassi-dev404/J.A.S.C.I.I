@@ -72,7 +72,8 @@ if (argc > 3) {
     if (size <= 0) exit(1); // Size must be a valid positive number
 }
 	// i stole this online
-	const char ASCIIMAP[] = "N@#W$9876543210?!abc;:+=-_,.  ";
+	const char ASCIIMAP[] = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/"
+													"\\|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
 	const int  num_char   = sizeof ASCIIMAP - 1;
 
 	// ah yes, initialising some *kewl* variables :)

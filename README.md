@@ -1,5 +1,5 @@
 wow first readme, kinda nervous.
-> NOTE: line 168-183 & 195-326 in /frontend/index.html were written by an LLM (i am sorry :c) <br>
+> NOTE: line 281-427 in /frontend/index.html were written by an LLM (i am sorry :c) <br>
 > Yes I am Using CoffeeScript And Jquery In 2026, Yes I am Crazy c:
 # J.A.S.C.I.I
 > Jassi's image (maybe even videos later c: ) to ASCII art program, it uses C for the ASCII generation and *web technology* for the front end. Watch it
