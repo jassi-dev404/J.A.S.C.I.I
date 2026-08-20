@@ -29,7 +29,7 @@
     />
   </head>
 
-  <body class="bg-[#272757]">
+  <body class="bg-[#272757] text-[#8686ac]">
     <!---  its not white its *whitish* and elegant --->
     <input
       type="file"
@@ -41,7 +41,7 @@
     <style>
       @font-face {
         font-family: custom;
-        src: url(/assets/JetBrainsMonoNL-Regular.ttf);
+        src: url(/assets/Monocraft.ttf);
         /*why tf do i have to use different comments for css smh, anyways yes one of the greatest fonts aot*/
       }
 
@@ -89,16 +89,11 @@
         cursor: pointer;
       }
     </style>
-    <div class="flex">
-    <button id="cool_button" class="font-[custom] text-[0.75rem] ml-auto text-right transition delay-100 duration-200 ease-in-out hover:-translate-y-1 hover:scale-130">
-      click me to get <span class="text-[1rem]">KEWLER</span> UI!!
-    </button>
-    </div>
-    <h1 id="heading" class="text-[9rem] text-center pt-8 font-[custom]">
-      J.A.S.C.I.I
+    <h1 id="heading" class="text-[8rem] text-center pt-8 font-[custom]">
+      THIS IS J.A.S.C.I.I
     </h1>
     <h2 class="text-[2rem] font-[custom] text-center pb-20">
-      Jassi's Image To
+      Jassi's *SUPER AWESOME* Image To
       <u class="text-blue-400"
         ><span class="text-blue-400"
           ><a href="https://en.wikipedia.org/wiki/ASCII_art" target="_blank"
@@ -110,7 +105,7 @@
     </h2>
     <div
       id="lol"
-      class="size-100 w-180 p-20 justify-center pt-28 items-center cursor-pointer"
+      class="size-100 w-200 p-20 justify-center pt-28 items-center cursor-pointer"
     >
       <h1 id="my-btn" class="text-center text-[3.3rem] font-[custom] pb-8">
         Click Me To Select Your Image <br />
@@ -210,6 +205,36 @@
         <-- Toggle To Use Coloured Mode
       </p>
     </div>
+    <script>
+      //gives random color pallete to page
+      const htmlbody = document.querySelector("body");
+      function getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      } 
+      a = getRndInteger(1, 6)
+      //generates a random number between 1-6 and rounds it down to natural number
+      if (a == 1) {
+        htmlbody.style.backgroundColor = "#272757";
+        htmlbody.style.color = "#8686ac";
+      } else if (a == 2) {
+        htmlbody.style.backgroundColor = "#e35336";
+        htmlbody.style.color = "#f5f5dc";
+      } else if (a == 3) {
+        htmlbody.style.backgroundColor = "#e491a6";
+        htmlbody.style.color = "#845763";
+      } else if (a == 4) {
+        htmlbody.style.backgroundColor = "#ffffe3";
+        htmlbody.style.color = "#dbd4ff";
+      } else if (a == 5) {
+        htmlbody.style.backgroundColor = "#f2c7c7";
+        htmlbody.style.color = "#ffffff";
+      }
+      else {
+        htmlbody.style.backgroundColor = "#b298e7";
+        htmlbody.style.color = "#b8e3e9";     
+      }
+      //uses random number to give random color pallete to page
+    </script>
     <script>
       var q = 0;
       var slider = document.getElementById("myRange");
