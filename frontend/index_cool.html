@@ -88,6 +88,9 @@
         width: 800px;
         cursor: pointer;
       }
+      html {
+        scrollbar-width: 100px;
+      }
     </style>
     <h1 id="heading" class="text-[8rem] text-center pt-8 font-[custom]">
       THIS IS J.A.S.C.I.I
@@ -216,22 +219,28 @@
       if (a == 1) {
         htmlbody.style.backgroundColor = "#272757";
         htmlbody.style.color = "#8686ac";
+        document.documentElement.style.scrollbarColor = "#272757 #8686ac";
       } else if (a == 2) {
         htmlbody.style.backgroundColor = "#e35336";
         htmlbody.style.color = "#f5f5dc";
+        document.documentElement.style.scrollbarColor = "#e35336 #f5f5dc";
       } else if (a == 3) {
         htmlbody.style.backgroundColor = "#e491a6";
         htmlbody.style.color = "#845763";
+        document.documentElement.style.scrollbarColor = "#e491a6 #845763";
       } else if (a == 4) {
         htmlbody.style.backgroundColor = "#dbd4ff";
         htmlbody.style.color = "#ffffe3";
+        document.documentElement.style.scrollbarColor = "#dbd4ff #ffffe3";
       } else if (a == 5) {
         htmlbody.style.backgroundColor = "#f2c7c7";
         htmlbody.style.color = "#ffffff";
+        document.documentElement.style.scrollbarColor = "#f2c7c7 #ffffff";
       }
       else {
         htmlbody.style.backgroundColor = "#b298e7";
-        htmlbody.style.color = "#b8e3e9";     
+        htmlbody.style.color = "#b8e3e9";
+        document.documentElement.style.scrollbarColor = "#b298e7";     
       }
       //uses random number to give random color pallete to page
     </script>
