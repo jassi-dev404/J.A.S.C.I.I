@@ -27,16 +27,16 @@ umm because:
    > `./ascii <color (1 for yes, 0 for no)> size` <br>
    > for example: `./ascii img/img.png 1 150`
    > <br>
-   > <img src="assets/example.webp" alt="cool example image" width="300">
+   > <img src="assets/example.webp" alt="cool example image" width="500">
 
 ## Some Examples
 
 A Good Boy <br>
 | Original Image | ASCII art made using `J.A.S.C.I.I` |
 | ------------- | ------------- |
-| <img src="/assets/apples.jpg" alt="cool apple image" width="200"> | <img src="/assets/apples ASCII.png" alt="cool apple ascii image" width="200"> |
-| <img src="/assets/good_boy.jpg" alt="cool dog image" width="200"> | <img src="/assets/good_boy ASCII.png" alt="cool dog ascii image" width="200"> |
-| <img src="/assets/hornet.jpg" alt="cool hornet image" width="200"> | <img src="/assets/hornet ASCII.png" alt="cool hornet ascii image" width="200"> |
+| <img src="/assets/apples.jpg" alt="cool apple image" width="200"> | <img src="/assets/apples ASCII.png" alt="cool apple ascii image" width="300"> |
+| <img src="/assets/good_boy.jpg" alt="cool dog image" width="200"> | <img src="/assets/good_boy ASCII.png" alt="cool dog ascii image" width="300"> |
+| <img src="/assets/hornet.jpg" alt="cool hornet image" width="200"> | <img src="/assets/hornet ASCII.png" alt="cool hornet ascii image" width="300"> |
 
 > Credits to Sophie for helping with WASM implementation <br>
 > thats it, jassi out :)
